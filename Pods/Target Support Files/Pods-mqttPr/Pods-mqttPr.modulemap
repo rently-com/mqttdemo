@@ -1,0 +1,6 @@
+framework module Pods_mqttPr {
+  umbrella header "Pods-mqttPr-umbrella.h"
+
+  export *
+  module * { export * }
+}
