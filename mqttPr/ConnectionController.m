@@ -1,4 +1,4 @@
- //
+//
 //  ConnectionController.m
 //  RentlyKeyless
 //
@@ -7,22 +7,29 @@
 //
 
 #import "ConnectionController.h"
+
 #define baseUrl2 @"https://exp-smarthome-pr-41.herokuapp.com"
 #define clientID2 @"00866ecd99e961c2a87c44b30d201381b34d31f94131de6d8d0b913845059e04"
 #define clientSecretID2 @"1e2be16d31e3c3b84c8a2f7549c35e28c2c0c2371626eafb3fccb61489e69748"
+
 @interface ConnectionController (){
+    AWSIoTMQTTStatus status1;
     AWSIoTDataManager *dataMgr;
     AWSIoTData *iotData;
     AWSIoTManager *iotMgr;
     AWSIoT *iot;
     BOOL isMqttConnected;
     AWSRegionType awsRegion;
+    AWSCognitoCredentialsProvider *prvd;
 }
 
 @end
 
 
 @implementation ConnectionController
+
+@synthesize mAWSIoTDataManager=mAWSIoTDataManager;
+
 
 -(id)init{
     self = [super init];
@@ -37,16 +44,55 @@
 
 
 -(void)disconnect{
-    if(isMqttConnected){
-        AWSIoTDataManager *mAWSIoTDataManager = AWSIoTDataManager.defaultIoTDataManager;
-        
+    
+    if (mAWSIoTDataManager) {
         [mAWSIoTDataManager disconnect];
-        
+    }
+    
+   
+    if(prvd){
+        [prvd clearKeychain];
     }
 }
 
+//-(void)connect{
+//    
+//    RentlyWebServicesClass *rently= [[RentlyWebServicesClass alloc]init];
+//    
+//    [rently getCognitoToken_WithComplition:^(NSError *error, NSDictionary *result) {
+//        
+//        NSLog(@"TokenDict->%@",result);
+//        
+//        AwsLoginProvider *loginPrd = [[AwsLoginProvider alloc]init];
+//        
+//        // loginPrd.token=[result objectForKey:@"token"] ;
+//        
+//        DeveloperAuthenticatedIdentityProvider *crPrd=[[DeveloperAuthenticatedIdentityProvider alloc]initWithRegionType:AWSRegionUSEast1 identityId:[result objectForKey:@"identity_id"] identityPoolId :@"us-east-1:2ecefabe-d8d7-4aba-9bc3-77fb7f4f85b7" token:nil providerName:@"smarthome" identityProviderManager:loginPrd ];
+//        
+//        AWSCognitoCredentialsProvider *prvd=[[AWSCognitoCredentialsProvider alloc]initWithRegionType:AWSRegionUSEast1 unauthRoleArn:@"arn:aws:iam::847283250964:role/Cognito_smarthome_hubsAuth_Role" authRoleArn:@"arn:aws:iam::847283250964:role/Cognito_smarthome_hubsAuth_Role" identityProvider:crPrd];
+//        
+//        AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSEast1 credentialsProvider:prvd];
+//        
+//        AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration;
+//        
+//        AWSIoTDataManager *mAWSIoTDataManager = AWSIoTDataManager.defaultIoTDataManager;
+//        
+//        [mAWSIoTDataManager connectUsingWebSocketWithClientId:[[[UIDevice currentDevice] identifierForVendor] UUIDString] cleanSession:YES statusCallback:^(AWSIoTMQTTStatus status) {
+//            
+//            NSLog(@"AWSIoTMQTTStatus Status->%ld",(long)status);
+//            
+//            [self mqttConnectionWith:status];
+//            
+//        }];
+//        
+//        
+//    }];
+//    
+//}
+
+
 -(void)connectToID:(NSString*)idStr{
-   
+    
     NSURL *callUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/hubs/%@/get_cognito_credentials",baseUrl2, idStr]];
     
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] init];
@@ -57,58 +103,47 @@
     
     [request setValue:@"application/xml" forHTTPHeaderField:@"Content-Type"];
     
-    //NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
-    
-    //[request setValue:[NSString stringWithFormat:@"Bearer  %@",accessToken]forHTTPHeaderField:@"Authorization"];
-    
     NSURLResponse* response;
     
     NSError* error = nil;
-    //Capturing server response
-//    NSData* result = [NSURLConnection sendSynchronousRequest:request  returningResponse:&response error:&error];
     
     NSData* result = [self sendSynchronousRequest:request returningResponse:&response error:&error];
     
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:0 error:nil];
     
     AwsLoginProvider *loginPrd = [[AwsLoginProvider alloc]init];
-    
     loginPrd.idStr=idStr ;
+    loginPrd.token = [dict objectForKey:@"token"];
     
     DeveloperAuthenticatedIdentityProvider *crPrd=[[DeveloperAuthenticatedIdentityProvider alloc]initWithRegionType:AWSRegionUSEast1 identityId:[dict objectForKey:@"identity_id"] identityPoolId :@"us-east-1:2ecefabe-d8d7-4aba-9bc3-77fb7f4f85b7" token:nil providerName:@"smarthome" identityProviderManager:loginPrd ];
     
     crPrd.idStr=idStr;
     
-    AWSCognitoCredentialsProvider *prvd=[[AWSCognitoCredentialsProvider alloc]initWithRegionType:AWSRegionUSEast1 unauthRoleArn:@"arn:aws:iam::847283250964:role/Cognito_smarthome_hubsAuth_Role" authRoleArn:@"arn:aws:iam::847283250964:role/Cognito_smarthome_hubsAuth_Role" identityProvider:crPrd];
+    prvd=[[AWSCognitoCredentialsProvider alloc]initWithRegionType:AWSRegionUSEast1 unauthRoleArn:@"arn:aws:iam::847283250964:role/Cognito_smarthome_hubsAuth_Role" authRoleArn:@"arn:aws:iam::847283250964:role/Cognito_smarthome_hubsAuth_Role" identityProvider:crPrd];
     
-    
-    
+    [prvd clearKeychain];
+
     AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSEast1 credentialsProvider:prvd];
-        
     
-    AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration;
-    
-    
-    AWSIoTDataManager *mAWSIoTDataManager = AWSIoTDataManager.defaultIoTDataManager;
-        
-    
+    mAWSIoTDataManager = [[AWSIoTDataManager  alloc] initWithConfiguration:configuration];
+
     NSString *clt=[[[UIDevice currentDevice] identifierForVendor] UUIDString];
     
-    NSString * timestamp = [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
-    
-    [mAWSIoTDataManager connectUsingWebSocketWithClientId:[NSString stringWithFormat:@"%@%@",clt,timestamp] cleanSession:YES statusCallback:^(AWSIoTMQTTStatus status) {
+    [mAWSIoTDataManager connectUsingWebSocketWithClientId:clt cleanSession:YES statusCallback:^(AWSIoTMQTTStatus status) {
         
-            NSLog(@"AWSIoTMQTTStatus Status->%ld",(long)status);
-            
-            [self mqttConnectionWith:status];
-            
-              }
-         ];
-  
+        NSLog(@"AWSIoTMQTTStatus Status->%ld",(long)status);
+        
+        [self mqttConnectionWith:status];
+        
+    }
+     ];
+    
 }
+
 
 -(void)mqttConnectionWith:(AWSIoTMQTTStatus)status{
     
+    status1=status;
     switch(status)
     {
         case AWSIoTMQTTStatusConnecting:
@@ -148,13 +183,7 @@
             break;
     }
 }
--(NSURL*)getCognitoUrl{
-    
-    //Create an URLRequest
-    NSURL *callUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/hubs/%@/get_cognito_credentials",baseUrl2, [[NSUserDefaults standardUserDefaults]objectForKey:@"id"]]];
-    NSLog(@"CognitoURL for HubID->%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"id"]);
-    return callUrl;
-}
+
 - (NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse **)response error:(NSError **)error
 {
     
@@ -178,5 +207,7 @@
     *error = err;
     return data;
 }
+
+
 
 @end

@@ -8,20 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		5151F74B1D76DBE600D125F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5151F74A1D76DBE600D125F5 /* main.m */; };
-		5151F74E1D76DBE600D125F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5151F74D1D76DBE600D125F5 /* AppDelegate.m */; };
-		5151F7511D76DBE600D125F5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5151F7501D76DBE600D125F5 /* ViewController.m */; };
 		5151F7541D76DBE600D125F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5151F7521D76DBE600D125F5 /* Main.storyboard */; };
 		5151F7561D76DBE600D125F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5151F7551D76DBE600D125F5 /* Assets.xcassets */; };
 		5151F7591D76DBE600D125F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5151F7571D76DBE600D125F5 /* LaunchScreen.storyboard */; };
 		5151F7641D76DBE600D125F5 /* mqttPrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5151F7631D76DBE600D125F5 /* mqttPrTests.m */; };
 		5151F76F1D76DBE600D125F5 /* mqttPrUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5151F76E1D76DBE600D125F5 /* mqttPrUITests.m */; };
-		5151F7861D76DC1E00D125F5 /* AwsLoginProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5151F77D1D76DC1E00D125F5 /* AwsLoginProvider.m */; };
-		5151F7871D76DC1E00D125F5 /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5151F77F1D76DC1E00D125F5 /* ConnectionController.m */; };
-		5151F7881D76DC1E00D125F5 /* DeveloperAuthenticatedIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5151F7811D76DC1E00D125F5 /* DeveloperAuthenticatedIdentityProvider.m */; };
-		5151F7891D76DC1E00D125F5 /* HubSubscriptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5151F7831D76DC1E00D125F5 /* HubSubscriptionController.m */; };
-		5151F78A1D76DC1E00D125F5 /* SubscriptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5151F7851D76DC1E00D125F5 /* SubscriptionController.m */; };
 		66899A4DCB96AA9329AE2292 /* Pods_mqttPrUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF77BDD0B3DCA6ECB291B6EF /* Pods_mqttPrUITests.framework */; };
 		76A62466CFA12DEB9087B34D /* Pods_mqttPrTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406811A94B7C6E578AAE2D80 /* Pods_mqttPrTests.framework */; };
+		D782E6E81D812FE100794EF7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D782E6DD1D812FE000794EF7 /* AppDelegate.m */; };
+		D782E6E91D812FE100794EF7 /* AwsLoginProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D782E6DF1D812FE000794EF7 /* AwsLoginProvider.m */; };
+		D782E6EA1D812FE100794EF7 /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D782E6E11D812FE100794EF7 /* ConnectionController.m */; };
+		D782E6EB1D812FE100794EF7 /* DeveloperAuthenticatedIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D782E6E31D812FE100794EF7 /* DeveloperAuthenticatedIdentityProvider.m */; };
+		D782E6EC1D812FE100794EF7 /* SubscriptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D782E6E51D812FE100794EF7 /* SubscriptionController.m */; };
+		D782E6ED1D812FE100794EF7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D782E6E71D812FE100794EF7 /* ViewController.m */; };
 		F30DA8ECC5F3BA8FC79C0FA7 /* Pods_mqttPr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5DCAD8C6E2AE0692BC6324 /* Pods_mqttPr.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,10 +48,6 @@
 		406811A94B7C6E578AAE2D80 /* Pods_mqttPrTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mqttPrTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5151F7461D76DBE600D125F5 /* mqttPr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mqttPr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5151F74A1D76DBE600D125F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5151F74C1D76DBE600D125F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		5151F74D1D76DBE600D125F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5151F74F1D76DBE600D125F5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5151F7501D76DBE600D125F5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5151F7531D76DBE600D125F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5151F7551D76DBE600D125F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5151F7581D76DBE600D125F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,20 +58,22 @@
 		5151F76A1D76DBE600D125F5 /* mqttPrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mqttPrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5151F76E1D76DBE600D125F5 /* mqttPrUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mqttPrUITests.m; sourceTree = "<group>"; };
 		5151F7701D76DBE600D125F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5151F77C1D76DC1E00D125F5 /* AwsLoginProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwsLoginProvider.h; sourceTree = "<group>"; };
-		5151F77D1D76DC1E00D125F5 /* AwsLoginProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwsLoginProvider.m; sourceTree = "<group>"; };
-		5151F77E1D76DC1E00D125F5 /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionController.h; sourceTree = "<group>"; };
-		5151F77F1D76DC1E00D125F5 /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionController.m; sourceTree = "<group>"; };
-		5151F7801D76DC1E00D125F5 /* DeveloperAuthenticatedIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeveloperAuthenticatedIdentityProvider.h; sourceTree = "<group>"; };
-		5151F7811D76DC1E00D125F5 /* DeveloperAuthenticatedIdentityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeveloperAuthenticatedIdentityProvider.m; sourceTree = "<group>"; };
-		5151F7821D76DC1E00D125F5 /* HubSubscriptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HubSubscriptionController.h; sourceTree = "<group>"; };
-		5151F7831D76DC1E00D125F5 /* HubSubscriptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HubSubscriptionController.m; sourceTree = "<group>"; };
-		5151F7841D76DC1E00D125F5 /* SubscriptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionController.h; sourceTree = "<group>"; };
-		5151F7851D76DC1E00D125F5 /* SubscriptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionController.m; sourceTree = "<group>"; };
 		796796C25006A85917A6ED84 /* Pods-mqttPr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mqttPr.release.xcconfig"; path = "Pods/Target Support Files/Pods-mqttPr/Pods-mqttPr.release.xcconfig"; sourceTree = "<group>"; };
 		7A5DCAD8C6E2AE0692BC6324 /* Pods_mqttPr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mqttPr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		831FB846D08D377539A91101 /* Pods-mqttPrUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mqttPrUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mqttPrUITests/Pods-mqttPrUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C12B38EA91BBAEF7F0FF96CC /* Pods-mqttPrTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mqttPrTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mqttPrTests/Pods-mqttPrTests.release.xcconfig"; sourceTree = "<group>"; };
+		D782E6DC1D812FE000794EF7 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D782E6DD1D812FE000794EF7 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D782E6DE1D812FE000794EF7 /* AwsLoginProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwsLoginProvider.h; sourceTree = "<group>"; };
+		D782E6DF1D812FE000794EF7 /* AwsLoginProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwsLoginProvider.m; sourceTree = "<group>"; };
+		D782E6E01D812FE000794EF7 /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionController.h; sourceTree = "<group>"; };
+		D782E6E11D812FE100794EF7 /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionController.m; sourceTree = "<group>"; };
+		D782E6E21D812FE100794EF7 /* DeveloperAuthenticatedIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeveloperAuthenticatedIdentityProvider.h; sourceTree = "<group>"; };
+		D782E6E31D812FE100794EF7 /* DeveloperAuthenticatedIdentityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeveloperAuthenticatedIdentityProvider.m; sourceTree = "<group>"; };
+		D782E6E41D812FE100794EF7 /* SubscriptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionController.h; sourceTree = "<group>"; };
+		D782E6E51D812FE100794EF7 /* SubscriptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionController.m; sourceTree = "<group>"; };
+		D782E6E61D812FE100794EF7 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D782E6E71D812FE100794EF7 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		FF77BDD0B3DCA6ECB291B6EF /* Pods_mqttPrUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mqttPrUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -133,20 +130,18 @@
 		5151F7481D76DBE600D125F5 /* mqttPr */ = {
 			isa = PBXGroup;
 			children = (
-				5151F77C1D76DC1E00D125F5 /* AwsLoginProvider.h */,
-				5151F77D1D76DC1E00D125F5 /* AwsLoginProvider.m */,
-				5151F77E1D76DC1E00D125F5 /* ConnectionController.h */,
-				5151F77F1D76DC1E00D125F5 /* ConnectionController.m */,
-				5151F7801D76DC1E00D125F5 /* DeveloperAuthenticatedIdentityProvider.h */,
-				5151F7811D76DC1E00D125F5 /* DeveloperAuthenticatedIdentityProvider.m */,
-				5151F7821D76DC1E00D125F5 /* HubSubscriptionController.h */,
-				5151F7831D76DC1E00D125F5 /* HubSubscriptionController.m */,
-				5151F7841D76DC1E00D125F5 /* SubscriptionController.h */,
-				5151F7851D76DC1E00D125F5 /* SubscriptionController.m */,
-				5151F74C1D76DBE600D125F5 /* AppDelegate.h */,
-				5151F74D1D76DBE600D125F5 /* AppDelegate.m */,
-				5151F74F1D76DBE600D125F5 /* ViewController.h */,
-				5151F7501D76DBE600D125F5 /* ViewController.m */,
+				D782E6DC1D812FE000794EF7 /* AppDelegate.h */,
+				D782E6DD1D812FE000794EF7 /* AppDelegate.m */,
+				D782E6DE1D812FE000794EF7 /* AwsLoginProvider.h */,
+				D782E6DF1D812FE000794EF7 /* AwsLoginProvider.m */,
+				D782E6E01D812FE000794EF7 /* ConnectionController.h */,
+				D782E6E11D812FE100794EF7 /* ConnectionController.m */,
+				D782E6E21D812FE100794EF7 /* DeveloperAuthenticatedIdentityProvider.h */,
+				D782E6E31D812FE100794EF7 /* DeveloperAuthenticatedIdentityProvider.m */,
+				D782E6E41D812FE100794EF7 /* SubscriptionController.h */,
+				D782E6E51D812FE100794EF7 /* SubscriptionController.m */,
+				D782E6E61D812FE100794EF7 /* ViewController.h */,
+				D782E6E71D812FE100794EF7 /* ViewController.m */,
 				5151F7521D76DBE600D125F5 /* Main.storyboard */,
 				5151F7551D76DBE600D125F5 /* Assets.xcassets */,
 				5151F7571D76DBE600D125F5 /* LaunchScreen.storyboard */,
@@ -466,14 +461,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5151F7861D76DC1E00D125F5 /* AwsLoginProvider.m in Sources */,
-				5151F7881D76DC1E00D125F5 /* DeveloperAuthenticatedIdentityProvider.m in Sources */,
-				5151F7871D76DC1E00D125F5 /* ConnectionController.m in Sources */,
-				5151F7511D76DBE600D125F5 /* ViewController.m in Sources */,
-				5151F78A1D76DC1E00D125F5 /* SubscriptionController.m in Sources */,
-				5151F74E1D76DBE600D125F5 /* AppDelegate.m in Sources */,
+				D782E6ED1D812FE100794EF7 /* ViewController.m in Sources */,
+				D782E6EB1D812FE100794EF7 /* DeveloperAuthenticatedIdentityProvider.m in Sources */,
+				D782E6E91D812FE100794EF7 /* AwsLoginProvider.m in Sources */,
+				D782E6EC1D812FE100794EF7 /* SubscriptionController.m in Sources */,
+				D782E6EA1D812FE100794EF7 /* ConnectionController.m in Sources */,
+				D782E6E81D812FE100794EF7 /* AppDelegate.m in Sources */,
 				5151F74B1D76DBE600D125F5 /* main.m in Sources */,
-				5151F7891D76DC1E00D125F5 /* HubSubscriptionController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

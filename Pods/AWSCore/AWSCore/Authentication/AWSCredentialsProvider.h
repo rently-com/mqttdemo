@@ -89,6 +89,11 @@ typedef NS_ENUM(NSInteger, AWSCognitoCredentialsProviderErrorType) {
  */
 - (void)invalidateCachedTemporaryCredentials;
 
+/**
+ Clear ALL saved values for this provider (identityId, credentials, logins).
+ */
+- (void)clearKeychain;
+
 @end
 
 /**

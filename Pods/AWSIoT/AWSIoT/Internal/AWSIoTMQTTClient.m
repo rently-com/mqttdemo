@@ -363,6 +363,9 @@ static AWSIoTMQTTClient *_defaultMQTTClient = nil;
 }
 
 - (void)reconnectToSession {
+    
+    [self.configuration.credentialsProvider clearKeychain];
+    
     self.needReconnect = self.cleanSession;
     
     //

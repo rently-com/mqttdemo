@@ -52,14 +52,22 @@
 }
 
 - (IBAction)DisconnectMqtt:(id)sender {
+    
+    subscriptionObj.mAWSIoTDataManager = connectionObj.mAWSIoTDataManager;
+    
     if(topicArray.count){
         for(NSString *idStr in topicArray)
             [subscriptionObj unSubscribeForTopic:idStr];
     }
+    
     topicArray = nil;    
+    
     [connectionObj disconnect];
+    
     _idTextField.text=@"";
+    
     _subscribeButton.enabled=NO;
+    
     _connButton.enabled = YES;
     
     
@@ -67,14 +75,15 @@
 
 
 - (IBAction)subscribeMe:(id)sender {
-    NSString *ids =allTrim(_idTextField.text);
-    _idTextField.text=@"";
-    topicArray = @[@"$aws/things/30020/shadow/update/accepted",@"$aws/things/ec8686d8-8e60-4656-b147-611a056dd8ae/shadow/update/accepted"];//[ids componentsSeparatedByString:@","];
     
-    [self performSelector:@selector(test) withObject:nil afterDelay:3.0f];
-}
+    subscriptionObj.mAWSIoTDataManager = connectionObj.mAWSIoTDataManager;
+    
+    NSString *ids =allTrim(_idTextField.text);
 
--(void)test{
+    _idTextField.text=@"";
+    
+    topicArray = [ids componentsSeparatedByString:@","];
+    
     for(NSString *idStr in topicArray)
         [subscriptionObj subscribeForTopic:idStr];
 }
@@ -91,6 +100,87 @@
     
 }
 - (void)onTopicUpdate:(NSDictionary *)dict{
-   _logTextView.text = [NSString stringWithFormat:@"%@\nFor Topic%@ Data->%@",_logTextView.text,[dict objectForKey:@"topic" ],[dict objectForKey:@"Data" ] ];
+   _logTextView.text = [NSString stringWithFormat:@"%@\n%@",_logTextView.text,dict ];
+    
+    if([dict objectForKey:@"state"]){
+        
+        NSDictionary *reportedDict = [[dict objectForKey:@"state"] objectForKey:@"reported"];
+        
+        if ([[reportedDict allKeys] containsObject:@"settings"]) {
+            
+            NSDictionary *settingsDict = [reportedDict objectForKey:@"settings"];
+
+            if ([[settingsDict allKeys] containsObject:@"devices"]) {
+                
+                NSArray *oldDevices = [topicArray copy];
+                
+                NSArray *currentDevices = [settingsDict objectForKey:@"devices"];
+                
+                if ([currentDevices count]) {
+                    
+                    NSMutableArray *arrTemp1 = [[NSMutableArray alloc] init];
+                    
+                    for(NSString *idStr in currentDevices)
+                        [arrTemp1 addObject:[NSString stringWithFormat:@"$aws/things/%@/shadow/update/accepted",idStr]];
+                    
+                    NSPredicate *intersectPredicate =[NSPredicate predicateWithFormat:@"self IN %@", arrTemp1];
+                    
+                    NSArray *arrTemp = [oldDevices filteredArrayUsingPredicate:intersectPredicate];
+                    
+                    NSMutableSet *setOld = [NSMutableSet setWithArray:oldDevices];
+                    
+                    NSMutableSet *setNew = [NSMutableSet setWithArray:arrTemp];
+                    
+                    //Finding deleted Devices
+                    [setOld minusSet:setNew];
+                    
+                    NSMutableArray *arrDeletedDevices = [[setOld allObjects] mutableCopy];
+                    
+                    NSLog(@"Deleted : %@",arrDeletedDevices);
+                    
+                    if(arrDeletedDevices && [arrDeletedDevices count]>0){
+                        
+                        [arrDeletedDevices removeObject:@"$aws/things/30024/shadow/update/accepted"];
+                        
+                        for(NSString *idStr in arrDeletedDevices)
+                            [subscriptionObj unSubscribeForTopic:idStr];
+                    }
+                    
+                    //Finding newly added Devices
+                    setOld = [NSMutableSet setWithArray:oldDevices];
+                    
+                    setNew = [NSMutableSet setWithArray:arrTemp1];
+                    
+                    [setNew unionSet: setOld];
+                    
+                    NSMutableArray *arrAddedDevices = [[setNew allObjects] mutableCopy];
+                    
+                    if ([arrAddedDevices count] == 0) {
+                        for(NSString *idStr in currentDevices)
+                            [arrAddedDevices addObject:[NSString stringWithFormat:@"$aws/things/%@/shadow/update/accepted",idStr]];
+                    }
+                    
+                    [arrAddedDevices removeObjectsInArray:oldDevices];
+                    
+                    NSLog(@"Added : %@",arrAddedDevices);
+                    
+                    if (arrAddedDevices) {
+                        for(NSString *topic in arrAddedDevices)
+                            [subscriptionObj subscribeForTopic:topic];
+                    }
+                }
+                else{
+                    if ([oldDevices count]) {
+                        //Unsubscripe current local Devices.
+                        for(NSString *idStr in oldDevices)
+                            [subscriptionObj unSubscribeForTopic:idStr];
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
 }
 @end

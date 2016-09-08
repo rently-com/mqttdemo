@@ -9,7 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <AWSCore/AWSCore.h>
 #import "AWSIdentityProvider.h"
-@interface AwsLoginProvider  : NSObject
+
+@interface AwsLoginProvider  : NSObject <AWSIdentityProviderManager>
+
 @property(nonatomic,retain) NSString *idStr;
-- (AWSTask<NSDictionary<NSString *, NSString *> *> *)logins;
+
+@property(nonatomic,retain) NSString *token;
+
 @end

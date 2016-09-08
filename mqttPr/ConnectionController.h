@@ -12,6 +12,7 @@
 #import <AWSIoT/AWSIoTDataManager.h>
 #import "DeveloperAuthenticatedIdentityProvider.h"
 #import "AwsLoginProvider.h"
+#import "SubscriptionController.h"
 
 @protocol ConnectionUpdateDelegate <NSObject>
 - (void)isAWSMQTTConnected:(BOOL)isConnected;
@@ -23,6 +24,8 @@
 }
 
 @property (nonatomic, weak) id <ConnectionUpdateDelegate> aWSMQTTConnectionDelegate;
+
+@property (nonatomic, retain) AWSIoTDataManager *mAWSIoTDataManager;
 
 -(void)connectToID:(NSString*)idStr;
 

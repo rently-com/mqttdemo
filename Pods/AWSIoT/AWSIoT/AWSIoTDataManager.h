@@ -170,6 +170,8 @@ typedef void(^AWSIoTMQTTExtendedNewMessageBlock)(NSObject *mqttClient, NSString 
  */
 + (instancetype)defaultIoTDataManager;
 
+- (instancetype)initWithConfiguration:(AWSServiceConfiguration *)configuration;
+
 /**
  Creates a service client with the given service configuration and registers it for the key.
 

@@ -19,6 +19,8 @@
 
 @property (nonatomic, weak) id < SubscriptionDelegate > delegate;
 
+@property (nonatomic, retain) AWSIoTDataManager *mAWSIoTDataManager;
+
 -(void)unSubscribeForTopic:(NSString*)topic;
 -(void)subscribeForTopic:(NSString*)topic;
 

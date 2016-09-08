@@ -23,15 +23,17 @@
 }
 
 -(void)subscribeForTopic:(NSString*)topic{
-   
-    AWSIoTDataManager *mAWSIoTDataManager = AWSIoTDataManager.defaultIoTDataManager;
-    [mAWSIoTDataManager subscribeToTopic:topic QoS:AWSIoTMQTTQoSMessageDeliveryAttemptedAtLeastOnce extendedCallback:^(NSObject *mqttClient, NSString *topic, NSData *data) {
-         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-         NSDictionary *newDataDict =[NSDictionary dictionaryWithObjectsAndKeys:dataDict,@"Data",topic,@"topic", nil];
-        [self callBackFromTopicUpdate:newDataDict];
-        }
-     ];
-
+    
+    if (self.mAWSIoTDataManager) {
+        [self.mAWSIoTDataManager subscribeToTopic:topic QoS:AWSIoTMQTTQoSMessageDeliveryAttemptedAtLeastOnce messageCallback:^(NSData *data) {
+            
+            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            
+            NSLog(@"Dict->%@",dataDict);
+            
+            [self callBackFromTopicUpdate:dataDict];
+        }];
+    }
 }
 
 -(void)callBackFromTopicUpdate:(NSDictionary *)dict{
@@ -43,9 +45,8 @@
 
 -(void)unSubscribeForTopic:(NSString*)topic{
     
-    AWSIoTDataManager *mAWSIoTDataManager = AWSIoTDataManager.defaultIoTDataManager;
-    
-    [mAWSIoTDataManager unsubscribeTopic:topic];
+    if (self.mAWSIoTDataManager)
+        [self.mAWSIoTDataManager unsubscribeTopic:topic];
     
 }
 
